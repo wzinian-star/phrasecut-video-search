@@ -1,0 +1,1 @@
+The Te quiero case is an editorial montage of 50 source excerpts. The source catalogue identifies the original publishers and time ranges. Film images, dialogue and audio remain the work of their respective creators. The case images include frames from the published demonstration and a typeset excerpt of the creator’s request.
