@@ -1,6 +1,12 @@
-# PhraseCut · Video Quote Search
+# PhraseCut · Find video clips by phrase
 
-PhraseCut searches timed dialogue for a word or phrase and returns the source edition, time range, line, context and evidence. It runs offline with Python 3.9+ and the standard library. Download and unzip the repository, open a terminal in its root, and try either real example.
+Remember a line but need the clip? Search the included dialogue catalogue or your own SRT / WebVTT subtitle files to find the source video, timestamp and surrounding words. Editors can search several interviews in one pass and cut the selected seconds from a matching local video.
+
+In the film *Rumbos*, a man is asked how he tells his wife he loves her. His two-word answer, “Te quiero,” is in **00:08.380–00:12.630** of the linked excerpt. [Watch the source](https://www.ecartelera.com/videos/clip-rumbos-te-amo-o-te-quiero/) · [Browse 50 excerpts across 18 productions](te-quiero.md)
+
+![PhraseCut search result for Rumbos with the original quote, source timestamp and audio evidence](assets/rumbos-quote-search.png)
+
+Search runs offline with Python 3.9+ and the standard library. Download and unzip the repository, open a terminal in its root, and run either query.
 
 ```sh
 python3 phrasecut.py search 'Find 1 English clip saying “could be dying”'
@@ -19,7 +25,7 @@ The creator’s Spanish video series now has **105 catalogued excerpts from 95 d
 python3 phrasecut.py search 'no pasa nada' --lang es --limit 3
 ```
 
-## Bring a subtitle track
+## Search across your interview or podcast subtitles
 
 ```sh
 python3 phrasecut.py index examples/studio-notes.vtt --title "Studio notes" --lang en --source studio-demo --out studio-index.json
