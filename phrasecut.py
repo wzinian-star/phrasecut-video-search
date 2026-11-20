@@ -229,7 +229,7 @@ def main():
     cut.add_argument("--end", required=True, type=float)
     args = parser.parse_args()
     if args.command == "search":
-        paths = [DATA / "spanish.json", DATA / "english.json", *args.index]
+        paths = [DATA / "spanish.json", DATA / "english.json", DATA / "screening-room.json", *args.index]
         report = search(args.query, paths, args.lang, args.limit, args.supplement)
         if args.json:
             print(json.dumps(report, ensure_ascii=False, indent=2))

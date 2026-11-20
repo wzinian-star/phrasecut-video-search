@@ -20,6 +20,25 @@ class PhraseSearch(unittest.TestCase):
         self.assertEqual({r["evidence"] for r in report["results"]}, {"audio-asr"})
         self.assertEqual(pc.search("su mujer", self.catalog)["results"][0]["evidence"], "edit-transcript")
 
+    def test_screening_room_in_default_cli(self):
+        def results(phrase):
+            command = [sys.executable, str(pc.ROOT / "phrasecut.py"), "search", phrase, "--lang", "es", "--json"]
+            return json.loads(subprocess.check_output(command, text=True))
+
+        report = results("no pasa nada")
+        self.assertEqual((report["available"], report["source_pages"]), (10, 10))
+        scene, = (r for r in report["results"] if r["title"] == "Inevitable")
+        self.assertEqual((scene["start"], scene["end"]), (98.96, 102.19))
+        self.assertEqual(results("vale")["source_pages"], 9)
+        self.assertEqual(results("no me jodas")["available"], 5)
+        for phrase in ("gilipollas", "qué cojones"):
+            rows = results(phrase)["results"]
+            self.assertEqual(len(rows), 5)
+            self.assertEqual({r["evidence"] for r in rows}, {"edit-transcript"})
+        for phrase, count in [("feliz cumpleaños", 17), ("cumpleaños feliz", 3)]:
+            verified = [r for r in results(phrase)["results"] if r["evidence"] == "audio-asr"]
+            self.assertEqual(len(verified), count)
+
     def test_real_english_source_clock(self):
         row, = pc.search("Find 1 English clip saying “could be dying”", self.catalog)["results"]
         self.assertEqual((row["start"], row["end"]), (334, 339.5))

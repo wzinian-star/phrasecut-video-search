@@ -1,4 +1,4 @@
-# Find a line in a video
+# PhraseCut · Video Quote Search
 
 PhraseCut searches timed dialogue for a word or phrase and returns the source edition, time range, line, context and evidence. It runs offline with Python 3.9+ and the standard library. Download and unzip the repository, open a terminal in its root, and try either real example.
 
@@ -10,6 +10,14 @@ python3 phrasecut.py search 'te quiero' --lang es --limit 2
 In the English example, seek to **05:34.000–05:39.500** in *ECAM 2018*. The speaker says “He could be dying.” The source page had Spanish text, while the local recording contained English speech. A second offline transcription of the exported interval confirmed the phrase. The local sample started 334 seconds into the source. [Watch at Mediateca de EducaMadrid](https://mediateca.educa.madrid.org/video/s676kx3asrhxjy77)
 
 The Spanish case began as a request for 20 film or TV scenes with “te quiero.” The edit grew to 50 excerpts, each from a distinct publisher page, across 18 works. The catalogue gives times relative to each linked excerpt. [Browse all 50 sources](te-quiero.md)
+
+## Browse before installing
+
+The creator’s Spanish video series now has **105 catalogued excerpts from 95 distinct source pages**. Browse [Vale](screening-room.md#vale), [No pasa nada](screening-room.md#no-pasa-nada), [birthday wishes](screening-room.md#birthday), [No me jodas](screening-room.md#no-me-jodas), [Gilipollas](screening-room.md#gilipollas), [Qué cojones](screening-room.md#que-cojones) or [Te quiero](te-quiero.md). Each table gives times in the linked source edition. The birthday selection has 17 instances of *feliz cumpleaños* and three of *cumpleaños feliz*. Search the two word orders separately.
+
+```sh
+python3 phrasecut.py search 'no pasa nada' --lang es --limit 3
+```
 
 ## Bring a subtitle track
 

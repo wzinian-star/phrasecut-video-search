@@ -1,10 +1,24 @@
-# PhraseCut · 一句话找视频台词
+# PhraseCut 台词找片 · Video Quote Search
 
-**想剪一句「我爱你」，先找到演员说出口的那几秒。** 给 PhraseCut 一个词或短语，它会在已有视频台词和字幕索引里找出原话，列出来源、入点、出点、场景和核对依据。剪访谈、做影视混剪、找语言教学例句，都可以从同一个问题开始。
+想剪一句西语「没关系」，却不知道哪一集、哪一秒说过？在《Amar es para siempre》里，有人把礼物忘了，对方回了一句 **“No pasa nada, mujer.”** 打开来源视频，直接听 **00:43.170–00:46.790**。[去看这句原话](https://www.antena3.com/series/amar/momentos/maria-se-come-a-besos-a-ignacio-en-la-celebracion-de-su-cumpleanos_201806065b17feed0cf266f444e58d82.html)
 
-**Find the moment someone says a line.** Multilingual video quote search for creators and editors. Search timed subtitles and dialogue, inspect the source, then clip a local video with FFmpeg when needed. By [@wzinian-star](https://github.com/wzinian-star). [English quick start](docs/english.md)
+**第一次来，可以直接翻片源。** 下面是「华金的西语放映室」做过的七期视频。点一句台词，就能看到原话、来源和剪点，在手机上也能查。
 
-![PhraseCut 实际检索页。搜索 te quiero 命中 50 段、50 个来源页、18 部作品，页面展开其中两段。](docs/assets/phrasecut-results.png)
+[<img src="docs/assets/cover-vale.jpg" width="30%" alt="华金的西语放映室：Vale 水彩片头">](docs/screening-room.md#vale) [<img src="docs/assets/cover-no-pasa-nada.jpg" width="30%" alt="华金的西语放映室：No pasa nada 水彩片头">](docs/screening-room.md#no-pasa-nada) [<img src="docs/assets/cover-te-quiero.jpg" width="30%" alt="华金的西语放映室：Te quiero 水彩片头">](docs/te-quiero.md)
+
+| 想找的台词 | 入选片段 | 不同来源页 |
+| --- | ---: | ---: |
+| [Vale · 行，好啊，知道了](docs/screening-room.md#vale) | 10 | 9 |
+| [No pasa nada · 没事，没关系](docs/screening-room.md#no-pasa-nada) | 10 | 10 |
+| [Feliz cumpleaños · 生日快乐](docs/screening-room.md#birthday) | 20 | 19 |
+| [Te quiero · 我爱你](docs/te-quiero.md) | 50 | 50 |
+| [No me jodas · 不会吧，别吓我](docs/screening-room.md#no-me-jodas) | 5 | 5 |
+| [Gilipollas · 责骂、自嘲与打趣](docs/screening-room.md#gilipollas) | 5 | 5 |
+| [Qué cojones · 惊讶与质问](docs/screening-room.md#que-cojones) | 5 | 5 |
+
+七期合计 **105 段、95 个不同来源页**，其中 95 段的目标短语留有离线语音识别证据，《Gilipollas》和《Qué cojones》的 10 段来自剪辑台词表。同一来源页可以贡献多个场景。生日篇收录了从 50 段中精选的 20 段。《我爱你》的新版片头与同一期的 50 段共用一份片源目录。[看生日篇的横、竖封面](docs/screening-room.md#covers)
+
+**Use it on your own videos.** PhraseCut searches multilingual dialogue and original-language subtitles for an exact phrase. Each result links to its source and timecode, with context and audio evidence when available. [English quick start](docs/english.md) · [@wzinian-star](https://github.com/wzinian-star)
 
 ## 从一句话开始
 
@@ -12,12 +26,13 @@
 
 ```sh
 python3 phrasecut.py search '找 2 段西语里说「te quiero」的片段'
+python3 phrasecut.py search 'no pasa nada' --lang es --limit 3
 python3 phrasecut.py search 'Find 1 English clip saying “could be dying”'
 ```
 
 第一条会返回《Rumbos》和《Toy Boy》。打开《Rumbos》的来源页，从 **00:08.380** 播到 **00:12.630**：一个人问对方平时跟妻子说 *te quiero* 还是 *te amo*，对方回答 *Te quiero*。坐标从链接里的视频第一帧起算。[《Rumbos》原节选](https://www.ecartelera.com/videos/clip-rumbos-te-amo-o-te-quiero/)
 
-第二条会返回 ECAM 2018 英语短片的 **05:34.000–05:39.500**。说话者担心有人可能快死了，接着质问对方怎么还在想父母。两条命令都能在离线索引中复现；在线播放器的访问条件和版本由片源方决定。[英语片源](https://mediateca.educa.madrid.org/video/s676kx3asrhxjy77)
+英语查询会返回 ECAM 2018 英语短片的 **05:34.000–05:39.500**。说话者担心有人可能快死了，接着质问对方怎么还在想父母。两条命令都能在离线索引中复现；在线播放器的访问条件和版本由片源方决定。[英语片源](https://mediateca.educa.madrid.org/video/s676kx3asrhxjy77)
 
 ## 《Te quiero》是怎么找到的
 
@@ -56,6 +71,8 @@ python3 phrasecut.py search 'te quiero' --lang es --limit 2 --json
 python3 phrasecut.py clip rumbos-source.mp4 rumbos-line.mp4 --start 8.38 --end 12.63
 ```
 
+![首版《Te quiero》检索页，展示两段来源和入点。](docs/assets/phrasecut-results.png)
+
 ## 在 Codex 里用一句话
 
 项目内附带 [PhraseCut Skill](.agents/skills/phrasecut/SKILL.md)。在支持项目 Skill 的客户端打开此仓库后，可直接说 “找 8 个英语采访里嘉宾说 I’m good、用来婉拒别人的片段”。Skill 会先查已有索引，再按采访类型和语境筛选，报告缺几段。若允许外部补搜，可定向查缺少的原语言字幕，只核对入围时间窗。
@@ -70,4 +87,4 @@ python3 -m unittest discover -s tests -v
 
 西语 50 段沿用了制作时逐段识别和音轨对齐的证据，本次另外实际截出《Rumbos》片段并重新离线识别。英语案例使用此前保留的 15 秒本地片样，截取其中前 5.5 秒并重新离线识别，按原截取记录的 **334 秒偏移** 换算回来源播放器。英语案例的来源页本轮未联网复验。对白区间为可回看的场景窗口。
 
-公开包包含工具、Skill、来源、时间码与检索页截图。影视剪辑、封面、海报、含影视画面的案例图保留在制作端，公开再分发授权尚待核实。仓库维护者为 [@wzinian-star](https://github.com/wzinian-star)。
+公开包收录工具、Skill、时间码、检索页截图，以及系列主播插画的封面和片头缩略图。影视剪辑和含影视镜头的图片保存在制作端，公开再分发授权待核实。仓库维护者为 [@wzinian-star](https://github.com/wzinian-star)。
